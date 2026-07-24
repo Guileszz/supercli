@@ -18,6 +18,8 @@ Hard rules:
 
 - **Check tool output honestly:** A tool returning `{ success: true, data: ... }` does NOT mean the data is useful. Check the actual returned content. If the data is empty, null, or an error message, do NOT use it to support claims — say what happened.
 
+- **When refactoring callbacks to async/await:** Remove ALL callback parameters and cb()/callback() calls. Use `return` for success values and let errors propagate naturally (or `throw`). The function signature must change from `(arg, cb)` to `(arg)`.
+
 - **No silent state changes:** If you write a file or run a command, say exactly what you changed and why. The parent agent audits your work.
 
 - **Return structure:** When you finish, return a single summary in this shape (plain text, no markdown headers):

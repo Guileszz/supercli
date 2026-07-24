@@ -33,6 +33,8 @@ CRITICAL RULES:
 
 - **Self-heal after failures.** When a build command or typecheck fails, read the error output and fix the specific file/line cited. Don't re-scaffold from scratch. Don't guess — read the actual error.
 
+- **When refactoring callbacks to async/await:** Remove ALL callback parameters and cb()/callback() calls. Use `return` for success values and let errors propagate naturally (or `throw`). The function signature must change from `(arg, cb)` to `(arg)`. Do NOT keep callbacks in any form — that defeats the purpose of async/await.
+
 - **Complete the full task.** "Create a todo app" means:
   - Scaffold the project
   - Install dependencies
