@@ -1157,7 +1157,7 @@ function renderInput() {
     const cols = process.stdout.columns || 80
     const lines = atPicker.render(cols)
     for (const line of lines) {
-      process.stdout.write(line + "\n")
+      process.stdout.write("\r\n" + line)
     }
     atListLines = lines.length
   }
@@ -1167,7 +1167,7 @@ function renderInput() {
   const ddLines = ddTracker.render(process.stdout.columns || 80)
   if (ddLines.length > 0) {
     for (const line of ddLines) {
-      process.stdout.write(line + "\n")
+      process.stdout.write("\r\n" + line)
     }
     ddListLines = ddLines.length
   }

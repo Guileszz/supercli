@@ -69,6 +69,9 @@ export async function runAgent(
   // Track tool call repetition — same tool + same args 3+ times signals a loop
   const toolCallHistory: Array<{ toolName: string; argsKey: string }> = []
   let stopForRepetition = false
+  // Hallucination guard: detect when model claims actions but made zero tool calls
+  let lastStepHadToolCalls = false
+  let lastStepHadActionClaim = false
 
   const messages = buildMessages(opts)
 
@@ -96,6 +99,20 @@ export async function runAgent(
                 "SYSTEM NOTICE: You have called the same tools with the same arguments " +
                 "multiple times without making progress. Stop repeating yourself. " +
                 "Analyze what you already know and respond to the user.",
+            }],
+          }
+        }
+        // Hallucination guard: previous step claimed actions but made no tool calls
+        if (lastStepHadActionClaim) {
+          lastStepHadActionClaim = false
+          return {
+            messages: [{
+              role: "system" as const,
+              content:
+                "SYSTEM NOTICE: Your previous response claimed to have made changes " +
+                "(e.g., wrote, edited, refactored) but you did not call any tools. " +
+                "Do not describe changes — actually execute them by calling the appropriate " +
+                "tool (edit_file, write_file, run_command, etc.). Then summarize what you did.",
             }],
           }
         }
@@ -186,6 +203,13 @@ export async function runAgent(
           if (toolCallHistory.length > 12) {
             toolCallHistory.splice(0, toolCallHistory.length - 12)
           }
+        }
+        // Track whether this step had tool calls for the hallucination guard
+        lastStepHadToolCalls = (event.toolCalls?.length ?? 0) > 0
+        lastStepHadActionClaim = false
+        if (!lastStepHadToolCalls && event.text) {
+          const actionClaimRe = /\b(wrote|updated|added|created|ran|executed|fixed|refactored|removed|deleted|installed|modified|edited|applied|saved|generated|wired|hooked)\b/i
+          lastStepHadActionClaim = actionClaimRe.test(event.text)
         }
         opts.onStepFinish?.(event)
       },
