@@ -6,6 +6,7 @@ import prisma from "./lib/prisma"
 import { loadEnvOnce } from "./lib/load-env"
 import { recordUsage } from "./lib/track-usage"
 import { computeCost } from "./lib/pricing"
+import { checkDailyTokenBudget } from "./lib/token-budget"
 import { registerAnalyticsRoutes } from "./routes/analytics"
 import { transcribeAudio } from "./voice/speech"
 import { tmpdir } from "os"
@@ -301,6 +302,11 @@ app.post("/api/ai/chat", async (req, res) => {
       return
     }
 
+    const isByok = provider === "concentrateai" && !!req.body.concentrateAiKey
+    if (!isByok) {
+      await checkDailyTokenBudget(user.id)
+    }
+
     const systemMessages = messages.filter((m: any) => m.role === "system")
     const nonSystemMessages = messages.filter((m: any) => m.role !== "system")
     const system = systemMessages.map((m: any) => m.content).join("\n")
@@ -333,6 +339,7 @@ app.post("/api/ai/chat", async (req, res) => {
           inputTokens, outputTokens, cachedInputTokens, totalTokens,
           costUsd: computeCost(modelName, inputTokens, outputTokens, cachedInputTokens),
           durationMs: Date.now() - googleStart,
+          userId: user.id,
         })
         res.write(JSON.stringify({ type: "finish", reason: await result.finishReason, usage }) + "\n")
         res.end()
@@ -441,6 +448,7 @@ app.post("/api/ai/chat", async (req, res) => {
           totalTokens: inputTokens + outputTokens,
           costUsd: computeCost(modelName, inputTokens, outputTokens, 0),
           durationMs: Date.now() - orStart,
+          userId: user.id,
         })
         res.write(JSON.stringify({
           type: "finish", reason: "stop",
@@ -478,6 +486,7 @@ app.post("/api/ai/chat", async (req, res) => {
           inputTokens, outputTokens, cachedInputTokens, totalTokens,
           costUsd: computeCost(modelName, inputTokens, outputTokens, cachedInputTokens),
           durationMs: Date.now() - mmStart,
+          userId: user.id,
         })
         res.write(JSON.stringify({ type: "finish", reason: await result.finishReason, usage }) + "\n")
         res.end()
@@ -588,6 +597,7 @@ app.post("/api/ai/chat", async (req, res) => {
           totalTokens: inputTokens + outputTokens,
           costUsd: computeCost(modelName, inputTokens, outputTokens, 0),
           durationMs: Date.now() - nvidiaStart,
+          userId: user.id,
         })
         res.write(JSON.stringify({
           type: "finish", reason: "stop",
@@ -698,6 +708,7 @@ app.post("/api/ai/chat", async (req, res) => {
           totalTokens: inputTokens + outputTokens,
           costUsd: computeCost(modelName, inputTokens, outputTokens, 0),
           durationMs: Date.now() - mdStart,
+          userId: user.id,
         })
         res.write(JSON.stringify({
           type: "finish", reason: "stop",
@@ -809,6 +820,7 @@ app.post("/api/ai/chat", async (req, res) => {
           totalTokens: inputTokens + outputTokens,
           costUsd: computeCost(modelName, inputTokens, outputTokens, 0),
           durationMs: Date.now() - orStart,
+          userId: user.id,
         })
         res.write(JSON.stringify({
           type: "finish", reason: "stop",
@@ -974,6 +986,7 @@ app.post("/api/ai/chat", async (req, res) => {
           totalTokens: inputTokens + outputTokens,
           costUsd: computeCost(modelName, inputTokens, outputTokens, 0),
           durationMs: Date.now() - caStart,
+          userId: user.id,
         })
         res.write(JSON.stringify({
           type: "finish", reason: "stop",
@@ -1133,6 +1146,7 @@ app.post("/api/ai/chat", async (req, res) => {
           totalTokens: inputTokens + outputTokens,
           costUsd: computeCost(modelName, inputTokens, outputTokens, 0),
           durationMs: Date.now() - scStart,
+          userId: user.id,
         })
         res.write(JSON.stringify({
           type: "finish", reason: "stop",
@@ -1149,6 +1163,8 @@ app.post("/api/ai/chat", async (req, res) => {
     const msg = String(error)
     if (msg.includes("insufficient balance") || msg.includes("402")) {
       res.status(402).json({ error: "MiniMax API: insufficient balance. Top up at https://platform.minimax.ai" })
+    } else if (msg.includes("daily limit of 128K tokens")) {
+      res.status(429).json({ error: msg })
     } else {
       res.status(500).json({ error: msg })
     }
@@ -1167,6 +1183,11 @@ app.post("/api/ai/generate-object", async (req, res) => {
     if (!prompt) {
       res.status(400).json({ error: "Prompt is required" })
       return
+    }
+
+    const isByok = provider === "concentrateai" && !!req.body.concentrateAiKey
+    if (!isByok) {
+      await checkDailyTokenBudget(user.id)
     }
 
     const { generateObject } = await import("ai")
@@ -1327,6 +1348,8 @@ app.post("/api/ai/generate-object", async (req, res) => {
     const msg = String(error)
     if (msg.includes("insufficient balance") || msg.includes("402")) {
       res.status(402).json({ error: "MiniMax API: insufficient balance. Top up at https://platform.minimax.ai" })
+    } else if (msg.includes("daily limit of 128K tokens")) {
+      res.status(429).json({ error: msg })
     } else {
       res.status(500).json({ error: msg })
     }

@@ -4,7 +4,7 @@ import chalk from "chalk"
 import { recordUsage } from "../../lib/track-usage"
 import { computeCost } from "../../lib/pricing"
 import { isEmptyToolResult, isDeniedToolResult, summarizeToolResult, tcName } from "./tool-result"
-import { checkDailyOpusLimit, incrementDailyOpusCount, checkDailyTokenBudget } from "../../lib/token-budget"
+import { checkDailyOpusLimit, incrementDailyOpusCount } from "../../lib/token-budget"
 
 const HIGH_VALUE_MODELS = ["anthropic/claude-fable-5", "anthropic/claude-opus-4-8", "anthropic/claude-opus-4-7", "openai/gpt-5.5"]
 const OPUS_MODELS = ["anthropic/claude-opus-4-8", "anthropic/claude-opus-4-7"]
@@ -118,7 +118,6 @@ export class ConcentrateService {
       const systemMessages = messages.filter(m => m.role === "system")
       const nonSystemMessages = messages.filter(m => m.role !== "system")
       const system = systemMessages.map(m => m.content).join("\n")
-      await checkDailyTokenBudget()
       if (OPUS_MODELS.includes(this.modelName)) {
         await checkDailyOpusLimit()
         await incrementDailyOpusCount()
