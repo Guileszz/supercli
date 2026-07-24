@@ -2,10 +2,26 @@ import { getStoredToken } from "src/lib/token"
 import { zodToJsonSchema } from "zod-to-json-schema"
 import type { ModelMessage, FinishReason, LanguageModelUsage } from "ai"
 import { isEmptyToolResult, isDeniedToolResult, summarizeToolResult } from "./tool-result"
+import { appendProxyUsage } from "src/lib/token-budget"
+import prisma from "src/lib/prisma"
 
 const BASE_URL = process.env.SUPERCODE_SERVER_URL || "https://supercode-8w7e.onrender.com"
 
 const MAX_STEPS = 8
+
+async function getUserIdFromToken(): Promise<string | null> {
+  const token = await getStoredToken()
+  if (!token?.access_token) return null
+  try {
+    const session = await prisma.session.findUnique({
+      where: { token: token.access_token as string },
+      select: { userId: true },
+    })
+    return session?.userId ?? null
+  } catch {
+    return null
+  }
+}
 
 export class ServerProxyService {
   readonly modelName: string
@@ -96,6 +112,9 @@ export class ServerProxyService {
 
     if (!res.ok) {
       const text = await res.text()
+      if (text.includes("Insufficient Funds") || text.includes("Credit usage at configured limit")) {
+        throw new Error("Cloud AI is warming up. Please try again in a moment.")
+      }
       throw new Error(text || "AI proxy request failed")
     }
 
@@ -181,6 +200,7 @@ export class ServerProxyService {
     const seenStepResults: Array<{ toolName: string; result: string }> = []
     const deniedCounts = new Map<string, number>()
     const toolCallHistory: Array<{ toolName: string; argsKey: string }> = []
+    const userId = await getUserIdFromToken()
 
     // Convert tools to JSON-schema definitions ONCE (while the Zod schemas
     // are still intact) so the server can hand valid parameter schemas to
@@ -436,6 +456,19 @@ export class ServerProxyService {
       }
     }
 
+    if (userId && (usage.totalTokens ?? 0) > 0) {
+      appendProxyUsage({
+        provider: this.providerName,
+        model: this.modelName,
+        inputTokens: usage.inputTokens ?? 0,
+        outputTokens: usage.outputTokens ?? 0,
+        cachedInputTokens: usage.inputTokenDetails?.cacheReadTokens ?? 0,
+        totalTokens: usage.totalTokens ?? 0,
+        userId,
+        timestamp: Date.now(),
+      }).catch((e) => console.error("[proxy-usage] Failed to record:", e?.message))
+    }
+
     return {
       content: accumulatedContent,
       finishReason,
@@ -474,6 +507,9 @@ export class ServerProxyService {
 
     if (!res.ok) {
       const text = await res.text()
+      if (text.includes("Insufficient Funds") || text.includes("Credit usage at configured limit")) {
+        throw new Error("Cloud AI is warming up. Please try again in a moment.")
+      }
       throw new Error(text || "AI proxy generate-object request failed")
     }
 

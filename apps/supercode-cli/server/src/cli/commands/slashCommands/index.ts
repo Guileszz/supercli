@@ -35,7 +35,7 @@ export const COMMANDS = [
   { cmd: "/interact", desc: "Browser interaction via Firecrawl" },
   { cmd: "/crawl", desc: "Crawl a website via Firecrawl" },
   { cmd: "/parse", desc: "Parse a file (PDF, DOC, etc.) via Firecrawl" },
-  { cmd: "/usage", desc: "Show daily token usage and budget for Opus 4.8" },
+  { cmd: "/usage", desc: "Show your daily token usage across all models" },
   { cmd: "/token-limit", desc: "Show token limits and usage per model per day" },
   { cmd: "/clear", desc: "Clear current session messages" },
   { cmd: "/new", desc: "Start a new conversation" },
