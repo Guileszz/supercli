@@ -854,6 +854,7 @@ app.post("/api/ai/chat", async (req, res) => {
           max_tokens: getModelMaxTokens(modelName),
           temperature: 0.7,
           stream: true,
+          stream_options: { include_usage: true },
         }
         if (system && nonSystemMessages.length > 0) {
           bodyObj.messages = [{ role: "system", content: system }, ...bodyObj.messages]
@@ -940,6 +941,13 @@ app.post("/api/ai/chat", async (req, res) => {
           }
         }
 
+        // If streaming didn't include usage data, estimate from content.
+        if (inputTokens === 0 && outputTokens === 0) {
+          const fullInput = JSON.stringify(nonSystemMessages).length + (system?.length ?? 0)
+          inputTokens = Math.ceil(fullInput / 4)
+          outputTokens = Math.ceil(fullContent.length / 4)
+        }
+
         // Fallback: if streaming returned no text and no tool calls,
         // retry as non-streaming (ConcentrateAI's upstream intermittently
         // drops content on streaming requests).
@@ -1019,6 +1027,7 @@ app.post("/api/ai/chat", async (req, res) => {
           max_tokens: getModelMaxTokens(modelName),
           temperature: 0.7,
           stream: true,
+          stream_options: { include_usage: true },
         }
         if (system && nonSystemMessages.length > 0) {
           bodyObj.messages = [{ role: "system", content: system }, ...bodyObj.messages]
@@ -1103,6 +1112,11 @@ app.post("/api/ai/chat", async (req, res) => {
               }
             } catch { /* skip malformed */ }
           }
+        }
+        if (inputTokens === 0 && outputTokens === 0) {
+          const fullInput = JSON.stringify(nonSystemMessages).length + (system?.length ?? 0)
+          inputTokens = Math.ceil(fullInput / 4)
+          outputTokens = Math.ceil(fullContent.length / 4)
         }
         if (!fullContent.trim() && !sawToolCalls) {
           const fbBody: any = {
