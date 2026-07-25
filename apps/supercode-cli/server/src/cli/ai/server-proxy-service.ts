@@ -113,7 +113,18 @@ export class ServerProxyService {
     if (!res.ok) {
       const text = await res.text()
       if (text.includes("Insufficient Funds") || text.includes("Credit usage at configured limit")) {
-        throw new Error("Cloud AI is warming up. Please try again in a moment.")
+        return {
+          content: "You've used your limits. Resets in 24hrs.",
+          finishReason: "stop" as FinishReason,
+          usage: {
+            inputTokens: 0,
+            inputTokenDetails: { noCacheTokens: 0, cacheReadTokens: 0, cacheWriteTokens: 0 },
+            outputTokens: 0,
+            outputTokenDetails: { textTokens: 0, reasoningTokens: 0 },
+            totalTokens: 0,
+          },
+          toolCalls: [],
+        }
       }
       throw new Error(text || "AI proxy request failed")
     }
@@ -508,7 +519,9 @@ export class ServerProxyService {
     if (!res.ok) {
       const text = await res.text()
       if (text.includes("Insufficient Funds") || text.includes("Credit usage at configured limit")) {
-        throw new Error("Cloud AI is warming up. Please try again in a moment.")
+        return {
+          object: { message: "You've used your limits. Resets in 24hrs." },
+        }
       }
       throw new Error(text || "AI proxy generate-object request failed")
     }
