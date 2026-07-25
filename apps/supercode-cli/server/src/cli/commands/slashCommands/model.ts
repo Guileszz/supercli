@@ -59,6 +59,7 @@ export const CLOUD_MODELS: ModelEntry[] = [
 export const BYOK_MODELS: ModelEntry[] = [
   // ── ConcentrateAI (BYOK) ──────────────────────────────────────
   { value: SECTION_CONCENTRATEAI, label: "ConcentrateAI", provider: "concentrateai", cost: "", desc: "" },
+  { value: "anthropic/claude-opus-5", label: "Claude Opus 5", provider: "concentrateai", cost: "", desc: "Most capable" },
   { value: "anthropic/claude-opus-4-8", label: "Claude Opus 4.8", provider: "concentrateai", cost: "", desc: "Deep reasoning" },
   { value: "anthropic/claude-opus-4", label: "Claude Opus 4", provider: "concentrateai", cost: "", desc: "Top-tier reasoning" },
   { value: "anthropic/claude-sonnet-4-5", label: "Claude Sonnet 4.5", provider: "concentrateai", cost: "", desc: "Latest sonnet" },
@@ -83,6 +84,7 @@ export const BYOK_MODELS: ModelEntry[] = [
 
   // ── Merge Dev Gateway ────────────────────────────────────────
   { value: SECTION_MERGEDEV, label: "Merge Dev Gateway", provider: "mergedev", cost: "", desc: "" },
+  { value: "anthropic/claude-opus-5", label: "Claude Opus 5", provider: "mergedev", cost: "50x", desc: "Most capable" },
   { value: "anthropic/claude-sonnet-4-6", label: "Claude Sonnet 4.6", provider: "mergedev", cost: "12x", desc: "Latest sonnet" },
   { value: "anthropic/claude-opus-4-8", label: "Claude Opus 4.8", provider: "mergedev", cost: "40x", desc: "Deep reasoning" },
   { value: "gpt-4o", label: "GPT-4o", provider: "mergedev", cost: "4x", desc: "OpenAI flagship" },
@@ -134,6 +136,7 @@ export const BYOK_MODELS: ModelEntry[] = [
 
   // ── OpenRouter ──────────────────────────────────────────────
   { value: SECTION_OPENROUTER, label: "OpenRouter", provider: "openrouter", cost: "", desc: "" },
+  { value: "anthropic/claude-opus-5", label: "Claude Opus 5", provider: "openrouter", cost: "50x", desc: "Most capable" },
   { value: "anthropic/claude-opus-4-8", label: "Claude Opus 4.8", provider: "openrouter", cost: "40x", desc: "Deep reasoning" },
   { value: "anthropic/claude-opus-4", label: "Claude Opus 4", provider: "openrouter", cost: "30x", desc: "Top-tier reasoning" },
   { value: "anthropic/claude-sonnet-4", label: "Claude Sonnet 4", provider: "openrouter", cost: "12x", desc: "Balanced" },
@@ -171,6 +174,7 @@ export const BYOK_MODELS: ModelEntry[] = [
 
   // ── OrcaRouter ──────────────────────────────────────────────
   { value: SECTION_ORCAROUTER, label: "OrcaRouter", provider: "orcarouter", cost: "", desc: "" },
+  { value: "anthropic/claude-opus-5", label: "Claude Opus 5", provider: "orcarouter", cost: "", desc: "Most capable" },
   { value: "anthropic/claude-opus-4.8", label: "Claude Opus 4.8", provider: "orcarouter", cost: "", desc: "Deep reasoning" },
   { value: "anthropic/claude-opus-4", label: "Claude Opus 4", provider: "orcarouter", cost: "", desc: "Top-tier reasoning" },
   { value: "anthropic/claude-sonnet-4.5", label: "Claude Sonnet 4.5", provider: "orcarouter", cost: "", desc: "Latest sonnet" },

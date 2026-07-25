@@ -18,6 +18,7 @@ const CONTEXT_WINDOWS: Record<string, number> = {
   "glm-5.1": 203_000,
   "minimax-m3": 1_000_000,
   "anthropic/claude-fable-5": 1_000_000,
+  "anthropic/claude-opus-5": 1_000_000,
   "anthropic/claude-opus-4-8": 1_000_000,
   "anthropic/claude-opus-4-7": 1_000_000,
   "openai/gpt-5.5": 1_100_000,
