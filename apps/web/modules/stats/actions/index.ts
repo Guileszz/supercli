@@ -1,6 +1,6 @@
 "use server"
 
-import prisma from "@super/db-terminal"
+import prisma from "@super/db"
 
 export async function getStats() {
   try {
