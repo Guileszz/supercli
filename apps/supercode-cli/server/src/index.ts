@@ -122,6 +122,16 @@ app.use(
 
 registerAnalyticsRoutes(app, prisma)
 
+app.get("/api/data/users/count", async (_req, res) => {
+  try {
+    const count = await prisma.user.count()
+    res.json({ count })
+  } catch (error) {
+    console.error("[users/count] Error:", error)
+    res.status(500).json({ error: "Failed to fetch user count" })
+  }
+})
+
 app.get("/device", async (req, res) => {
   const { user_code } = req.query
   res.redirect(`${clientUrl}/device?user_code=${user_code}`)
