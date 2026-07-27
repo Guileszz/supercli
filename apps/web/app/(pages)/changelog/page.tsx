@@ -22,6 +22,383 @@ export default function ChangelogPage() {
             <div className="flex items-baseline gap-4 mb-8">
               <h2 className="text-[24px] font-semibold tracking-tight">
                 <a
+                  href="https://github.com/yashdev9274/supercli/releases/tag/v0.1.90"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline underline-offset-4 transition-colors"
+                >
+                  v0.1.90
+                </a>
+              </h2>
+              <span className="text-[14px] text-muted-foreground font-mono">Jul 25, 2026</span>
+            </div>
+
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-[17px] text-white font-semibold mb-3 text-muted-foreground uppercase tracking-wider">Infrastructure</h3>
+                <ul className="space-y-3 text-[14px] leading-relaxed text-foreground/85">
+                  <li>- Usage event migration — new <code className="text-primary bg-primary/10 px-1.5 py-0.5 rounded text-[13px] font-mono">usage_event</code> table for detailed event tracking.</li>
+                  <li>- Usage data included in AI streaming responses for real-time visibility.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <hr className="border-border" />
+
+          <section>
+            <div className="flex items-baseline gap-4 mb-8">
+              <h2 className="text-[24px] font-semibold tracking-tight">
+                <a
+                  href="https://github.com/yashdev9274/supercli/releases/tag/v0.1.89"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline underline-offset-4 transition-colors"
+                >
+                  v0.1.89
+                </a>
+              </h2>
+              <span className="text-[14px] text-muted-foreground font-mono">Jul 25, 2026</span>
+            </div>
+
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-[17px] text-white font-semibold mb-3 text-muted-foreground uppercase tracking-wider">CLI / TUI</h3>
+                <ul className="space-y-3 text-[14px] leading-relaxed text-foreground/85">
+                  <li>- Clearer usage limit error responses — structured messages instead of generic errors when limits are reached.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <hr className="border-border" />
+
+          <section>
+            <div className="flex items-baseline gap-4 mb-8">
+              <h2 className="text-[24px] font-semibold tracking-tight">
+                <a
+                  href="https://github.com/yashdev9274/supercli/releases/tag/v0.1.88"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline underline-offset-4 transition-colors"
+                >
+                  v0.1.88
+                </a>
+              </h2>
+              <span className="text-[14px] text-muted-foreground font-mono">Jul 25, 2026</span>
+            </div>
+
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-[17px] text-white font-semibold mb-3 text-muted-foreground uppercase tracking-wider">Model Support</h3>
+                <ul className="space-y-3 text-[14px] leading-relaxed text-foreground/85">
+                  <li>- <strong>Claude Opus 5</strong> added as a new model — included in high-value models, context windows, and pricing module.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <hr className="border-border" />
+
+          <section>
+            <div className="flex items-baseline gap-4 mb-8">
+              <h2 className="text-[24px] font-semibold tracking-tight">
+                <a
+                  href="https://github.com/yashdev9274/supercli/releases/tag/v0.1.87"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline underline-offset-4 transition-colors"
+                >
+                  v0.1.87
+                </a>
+              </h2>
+              <span className="text-[14px] text-muted-foreground font-mono">Jul 24, 2026</span>
+            </div>
+
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-[17px] text-white font-semibold mb-3 text-muted-foreground uppercase tracking-wider">CLI / TUI</h3>
+                <ul className="space-y-3 text-[14px] leading-relaxed text-foreground/85">
+                  <li>- Daily token budget management — integrated checks in AI chat and object generation endpoints.</li>
+                  <li>- Proxy usage tracking for better resource management and reporting.</li>
+                  <li>- Improved user feedback for daily token usage and limits in the <code className="text-primary bg-primary/10 px-1.5 py-0.5 rounded text-[13px] font-mono">/usage</code> command.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <hr className="border-border" />
+
+          <section>
+            <div className="flex items-baseline gap-4 mb-8">
+              <h2 className="text-[24px] font-semibold tracking-tight">
+                <a
+                  href="https://github.com/yashdev9274/supercli/releases/tag/v0.1.86"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline underline-offset-4 transition-colors"
+                >
+                  v0.1.86
+                </a>
+              </h2>
+              <span className="text-[14px] text-muted-foreground font-mono">Jul 24, 2026</span>
+            </div>
+
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-[17px] text-white font-semibold mb-3 text-muted-foreground uppercase tracking-wider">Agent</h3>
+                <ul className="space-y-3 text-[14px] leading-relaxed text-foreground/85">
+                  <li>- Hallucination guard in agent runner — detects when model claims actions without making tool calls.</li>
+                  <li>- New prompt rules for refactoring callbacks to async/await patterns.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <hr className="border-border" />
+
+          <section>
+            <div className="flex items-baseline gap-4 mb-8">
+              <h2 className="text-[24px] font-semibold tracking-tight">
+                <a
+                  href="https://github.com/yashdev9274/supercli/releases/tag/v0.1.85"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline underline-offset-4 transition-colors"
+                >
+                  v0.1.85
+                </a>
+              </h2>
+              <span className="text-[14px] text-muted-foreground font-mono">Jul 23, 2026</span>
+            </div>
+
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-[17px] text-white font-semibold mb-3 text-muted-foreground uppercase tracking-wider">CLI / TUI</h3>
+                <ul className="space-y-3 text-[14px] leading-relaxed text-foreground/85">
+                  <li>- JSON body size limit for requests, configurable via environment variable.</li>
+                  <li>- Error handling middleware with structured responses for oversized requests.</li>
+                  <li>- Enhanced diff functionality — line numbers and better context visualization for changes.</li>
+                  <li>- Improved progress display messaging in AI responses.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <hr className="border-border" />
+
+          <section>
+            <div className="flex items-baseline gap-4 mb-8">
+              <h2 className="text-[24px] font-semibold tracking-tight">
+                <a
+                  href="https://github.com/yashdev9274/supercli/releases/tag/v0.1.84"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline underline-offset-4 transition-colors"
+                >
+                  v0.1.84
+                </a>
+              </h2>
+              <span className="text-[14px] text-muted-foreground font-mono">Jul 23, 2026</span>
+            </div>
+
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-[17px] text-white font-semibold mb-3 text-muted-foreground uppercase tracking-wider">Skills</h3>
+                <ul className="space-y-3 text-[14px] leading-relaxed text-foreground/85">
+                  <li>- New skills management feature — commands to <code className="text-primary bg-primary/10 px-1.5 py-0.5 rounded text-[13px] font-mono">add</code>, <code className="text-primary bg-primary/10 px-1.5 py-0.5 rounded text-[13px] font-mono">remove</code>, and <code className="text-primary bg-primary/10 px-1.5 py-0.5 rounded text-[13px] font-mono">list</code> agent skills.</li>
+                  <li>- Skill loading functionality enhances AI interaction capabilities.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <hr className="border-border" />
+
+          <section>
+            <div className="flex items-baseline gap-4 mb-8">
+              <h2 className="text-[24px] font-semibold tracking-tight">
+                <a
+                  href="https://github.com/yashdev9274/supercli/releases/tag/v0.1.83"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline underline-offset-4 transition-colors"
+                >
+                  v0.1.83
+                </a>
+              </h2>
+              <span className="text-[14px] text-muted-foreground font-mono">Jul 22, 2026</span>
+            </div>
+
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-[17px] text-white font-semibold mb-3 text-muted-foreground uppercase tracking-wider">Web App</h3>
+                <ul className="space-y-3 text-[14px] leading-relaxed text-foreground/85">
+                  <li>- New <strong>ProvidersSection</strong> and <strong>FAQSection</strong> components on the homepage.</li>
+                  <li>- Docs updated with new Providers section, improved intro and quickstart guides.</li>
+                  <li>- Improved global styles and layout for visual consistency.</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="text-[17px] text-white font-semibold mb-3 text-muted-foreground uppercase tracking-wider">CLI / TUI</h3>
+                <ul className="space-y-3 text-[14px] leading-relaxed text-foreground/85">
+                  <li>- Reasoning content handling in AI chat for better response transparency.</li>
+                  <li>- Tool call budget guidelines to optimize tool usage efficiency.</li>
+                  <li>- <strong>brag</strong> skill support for project showcase videos.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <hr className="border-border" />
+
+          <section>
+            <div className="flex items-baseline gap-4 mb-8">
+              <h2 className="text-[24px] font-semibold tracking-tight">
+                <a
+                  href="https://github.com/yashdev9274/supercli/releases/tag/v0.1.82"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline underline-offset-4 transition-colors"
+                >
+                  v0.1.82
+                </a>
+              </h2>
+              <span className="text-[14px] text-muted-foreground font-mono">Jul 21, 2026</span>
+            </div>
+
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-[17px] text-white font-semibold mb-3 text-muted-foreground uppercase tracking-wider">BYOK / Provider</h3>
+                <ul className="space-y-3 text-[14px] leading-relaxed text-foreground/85">
+                  <li>- <code className="text-primary bg-primary/10 px-1.5 py-0.5 rounded text-[13px] font-mono">CLOUD_ALLOWED_MODELS</code> introduced to manage which models are accessible without a user-provided API key.</li>
+                  <li>- Streamlined API key retrieval logic across providers for improved error handling.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <hr className="border-border" />
+
+          <section>
+            <div className="flex items-baseline gap-4 mb-8">
+              <h2 className="text-[24px] font-semibold tracking-tight">
+                <a
+                  href="https://github.com/yashdev9274/supercli/releases/tag/v0.1.81"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline underline-offset-4 transition-colors"
+                >
+                  v0.1.81
+                </a>
+              </h2>
+              <span className="text-[14px] text-muted-foreground font-mono">Jul 20, 2026</span>
+            </div>
+
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-[17px] text-white font-semibold mb-3 text-muted-foreground uppercase tracking-wider">Providers</h3>
+                <ul className="space-y-3 text-[14px] leading-relaxed text-foreground/85">
+                  <li>- Refactored API key retrieval for MergeDev, MiniMax, Nvidia, and OpenRouter — streamlined access from environment variables.</li>
+                  <li>- Token usage tracking error handling improved — returns 0 on database errors instead of crashing.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <hr className="border-border" />
+
+          <section>
+            <div className="flex items-baseline gap-4 mb-8">
+              <h2 className="text-[24px] font-semibold tracking-tight">
+                <a
+                  href="https://github.com/yashdev9274/supercli/releases/tag/v0.1.80"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline underline-offset-4 transition-colors"
+                >
+                  v0.1.80
+                </a>
+              </h2>
+              <span className="text-[14px] text-muted-foreground font-mono">Jul 20, 2026</span>
+            </div>
+
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-[17px] text-white font-semibold mb-3 text-muted-foreground uppercase tracking-wider">OrcaRouter</h3>
+                <ul className="space-y-3 text-[14px] leading-relaxed text-foreground/85">
+                  <li>- OrcaRouter API integration for chat and object generation with enhanced error handling.</li>
+                  <li>- Environment variable management for OrcaRouter API keys.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <hr className="border-border" />
+
+          <section>
+            <div className="flex items-baseline gap-4 mb-8">
+              <h2 className="text-[24px] font-semibold tracking-tight">
+                <a
+                  href="https://github.com/yashdev9274/supercli/releases/tag/v0.1.79"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline underline-offset-4 transition-colors"
+                >
+                  v0.1.79
+                </a>
+              </h2>
+              <span className="text-[14px] text-muted-foreground font-mono">Jul 20, 2026</span>
+            </div>
+
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-[17px] text-white font-semibold mb-3 text-muted-foreground uppercase tracking-wider">Web App</h3>
+                <ul className="space-y-3 text-[14px] leading-relaxed text-foreground/85">
+                  <li>- New <strong>404 page</strong> — custom NotFound page for better user experience on broken links.</li>
+                  <li>- Added <code className="text-primary bg-primary/10 px-1.5 py-0.5 rounded text-[13px] font-mono">react-tweet</code> dependency for displaying tweets.</li>
+                  <li>- Updated partnerships section with new partner details and logos.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <hr className="border-border" />
+
+          <section>
+            <div className="flex items-baseline gap-4 mb-8">
+              <h2 className="text-[24px] font-semibold tracking-tight">
+                <a
+                  href="https://github.com/yashdev9274/supercli/releases/tag/v0.1.78"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary underline underline-offset-4 transition-colors"
+                >
+                  v0.1.78
+                </a>
+              </h2>
+              <span className="text-[14px] text-muted-foreground font-mono">Jul 19, 2026</span>
+            </div>
+
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-[17px] text-white font-semibold mb-3 text-muted-foreground uppercase tracking-wider">OrcaRouter</h3>
+                <ul className="space-y-3 text-[14px] leading-relaxed text-foreground/85">
+                  <li>- New <strong>OrcaRouter</strong> provider support with context window and pricing integration.</li>
+                  <li>- Updated OrcaRouter BYOK models — Claude Opus, Sonnet, Grok, DeepSeek, and Kimi.</li>
+                  <li>- Provider management enhanced to support OrcaRouter in connection and model selection.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <hr className="border-border" />
+
+          <section>
+            <div className="flex items-baseline gap-4 mb-8">
+              <h2 className="text-[24px] font-semibold tracking-tight">
+                <a
                   href="https://github.com/yashdev9274/supercli/releases/tag/v0.1.77"
                   target="_blank"
                   rel="noopener noreferrer"
