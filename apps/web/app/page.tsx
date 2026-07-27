@@ -3,6 +3,7 @@ import HeroSection from "@/components/homepage/hero";
 import GetStartedSection from "@/components/homepage/get-started";
 import PartnershipsSection from "@/components/homepage/partnerships-section";
 import ProvidersSection from "@/components/homepage/providers-section";
+import ChangelogCard from "@/components/homepage/changelog-card";
 import FAQSection from "@/components/homepage/faq-section";
 import Footer from "@/components/homepage/footer";
 
@@ -21,6 +22,8 @@ export default async function Home() {
       <PartnershipsSection />
 
       <ProvidersSection />
+
+      <ChangelogCard />
 
       <FAQSection />
 
