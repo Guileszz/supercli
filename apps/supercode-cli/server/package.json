@@ -57,7 +57,7 @@
     "chalk": "^5.6.2",
     "commander": "^15.0.0",
     "cors": "^2.8.5",
-    "eve": "^0.22.5",
+    "eve": "^0.47.2",
     "express": "^5.1.0",
     "marked": "^18.0.4",
     "marked-terminal": "^7.3.0",
